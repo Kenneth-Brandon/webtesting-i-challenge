@@ -6,32 +6,38 @@ module.exports = {
 };
 
 function succeed(item) {
-  if (item.enhancement < 20) {
-    item.enhancement = item.enhancement + 1;
+  let enhancement = item.enhancement;
+
+  if (enhancement < 20) {
+    return enhancement + 1;
+  } else {
+    return enhancement;
   }
-  return { ...item };
 }
 
 function fail(item) {
-  if (item.enhancement < 15) {
-    item.durability = item.durability - 5;
-  } else {
-    item.durability = item.durability - 10;
+  let enhancement = item.enhancement;
+  let durability = item.durability;
+
+  if (enhancement < 15) {
+    return durability - 5;
+  } else if (enhancement >= 15) {
+    return durability - 10;
+  } else if (enchantment > 16) {
+    return enhancement - 1;
   }
-  if (item.enhancement > 16) {
-    item.enhancement = item.enhancement - 1;
-  }
-  return { ...item };
 }
 
 function repair(item) {
-  item.durability = 100;
-  return { ...item };
+  let durability = item.durability;
+  return (durability = 100);
 }
 
 function get(item) {
-  if (item.enhancement > 0) {
-    item.name = `[+${item.enhancement}] ${item.name}`;
+  let enhancement = item.enhancement;
+  if (enhancement > 0) {
+    return `[+${enhancement}] ${item.name}`;
+  } else {
+    return item;
   }
-  return { ...item };
 }

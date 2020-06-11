@@ -1,85 +1,85 @@
-const { succeed, fail, repair, get } = require('./enhancer.js');
-// test away!
+const { repair, succeed, fail, get } = require('./enhancer.js');
 
-describe('enhancer', () => {
-  describe('repair', () => {
-    it('should restore durability to 100', () => {
-      let item = {
-        name: 'Buster sword',
-        durability: 27,
-        enhancement: 10,
-      };
-      const repairedItem = repair(item);
+describe('Enhancement', () => {
+  describe('Repair item', () => {
+    let item = {
+      name: 'Sting',
+      durability: 25,
+      enhancement: 13,
+    };
 
-      expect(repairedItem.durability).toBe(100);
+    it('Should restore durability of an item to 100', () => {
+      expect(repair(item)).toBe(100);
+      // console.log(item)
     });
   });
 
-  describe('succeed', () => {
-    it('should increase enhancement by 1', () => {
-      let enhancementStat = 10;
-      let item = {
-        name: 'Buster sword',
-        durability: 27,
-        enhancement: enhancementStat,
-      };
-      const enhancedItem = succeed(item);
-      expect(enhancedItem.enhancement).toBe(enhancementStat + 1);
-    });
-    it('should have enhancement stay at 20', () => {
-      let item = {
-        name: 'Buster sword',
-        durability: 27,
-        enhancement: 20,
-      };
-      const enhancedItem = succeed(item);
-      expect(enhancedItem.enhancement).toBe(20);
+  // Enhancement Succeeded (1 test)
+
+  describe('Enhance item suceeded', () => {
+    let item = {
+      name: 'Orcrist',
+      durability: 90,
+      enhancement: 13,
+    };
+
+    it('Should enhance item by 1 level', () => {
+      expect(succeed(item)).toBe(14);
+      // console.log(item)
     });
   });
-  describe('fail', () => {
-    it('should decrease durability by 5', () => {
-      let durabilityStat = 27;
-      let item = {
-        name: 'Buster sword',
-        durability: durabilityStat,
-        enhancement: 14,
-      };
-      const failedItem = fail(item);
-      expect(failedItem.durability).toBe(durabilityStat - 5);
-    });
-    it('should decrease durability by 10 and decrease enchancement by 1', () => {
-      let durabilityStat = 27;
-      let enchancementStat = 17;
-      let item = {
-        name: 'Buster sword',
-        durability: durabilityStat,
-        enhancement: enchancementStat,
-      };
-      const failedItem = fail(item);
-      expect(failedItem.durability).toBe(durabilityStat - 10);
-      expect(failedItem.enhancement).toBe(enchancementStat - 1);
+
+  // Enhancement Failed (3 tests)
+
+  describe('Enhance item failed with enhancement < 15', () => {
+    let item = {
+      name: 'Gúthwinë',
+      durability: 85,
+      enhancement: 13,
+    };
+
+    it('Should lower durability by 5 levels', () => {
+      expect(fail(item)).toBe(80);
+      // console.log(item)
     });
   });
-  describe('get', () => {
-    describe('should modify name with enhancement value', () => {
-      let itemName = 'Buster sword';
-      let item = {
-        name: itemName,
-        durability: 90,
-        enhancement: 14,
-      };
-      const getItem = get(item);
-      expect(getItem.name).toBe(`[+${getItem.enhancement}] ${itemName}`);
+
+  describe('Enhance item failed with enhancement >= 15', () => {
+    let item = {
+      name: 'Ringil',
+      durability: 95,
+      enhancement: 15,
+    };
+
+    it('Should lower durability by 10 levels', () => {
+      expect(fail(item)).toBe(85);
+      // console.log(item)
     });
-    describe('should modify name with enhancement value', () => {
-      let itemName = 'Buster sword';
-      let item = {
-        name: itemName,
-        durability: 90,
-        enhancement: 0,
-      };
-      const getItem = get(item);
-      expect(getItem.name).toBe(itemName);
+  });
+
+  describe('Enhance item failed with enhancement > 16', () => {
+    let item = {
+      name: 'Anglachel',
+      durability: 15,
+      enhancement: 17,
+    };
+
+    it('Should lower durability by 10 levels', () => {
+      expect(fail(item)).toBe(5);
+      // console.log(item)
     });
+  });
+});
+
+describe('Renames item with enhancement level', () => {
+  let item = {
+    name: 'Narsil',
+    durability: 15,
+    enhancement: 20,
+  };
+
+  it("Should modify item 'Narsil' to '[+20] Narsil'", () => {
+    expect(get(item)).toBe('[+20] Narsil');
+    // console.log(item)
   });
 });
