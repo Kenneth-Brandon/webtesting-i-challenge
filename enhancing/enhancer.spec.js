@@ -1,5 +1,6 @@
 const { repair, succeed, fail, get } = require('./enhancer.js');
 
+// Repair
 describe('Enhancement', () => {
   describe('Repair item', () => {
     let item = {
@@ -10,12 +11,10 @@ describe('Enhancement', () => {
 
     it('Should restore durability of an item to 100', () => {
       expect(repair(item)).toBe(100);
-      // console.log(item)
     });
   });
 
-  // Enhancement Succeeded (1 test)
-
+  // Succeed
   describe('Enhance item suceeded', () => {
     let item = {
       name: 'Orcrist',
@@ -25,12 +24,10 @@ describe('Enhancement', () => {
 
     it('Should enhance item by 1 level', () => {
       expect(succeed(item)).toBe(14);
-      // console.log(item)
     });
   });
 
-  // Enhancement Failed (3 tests)
-
+  // Fail
   describe('Enhance item failed with enhancement < 15', () => {
     let item = {
       name: 'Gúthwinë',
@@ -40,7 +37,6 @@ describe('Enhancement', () => {
 
     it('Should lower durability by 5 levels', () => {
       expect(fail(item)).toBe(80);
-      // console.log(item)
     });
   });
 
@@ -53,7 +49,6 @@ describe('Enhancement', () => {
 
     it('Should lower durability by 10 levels', () => {
       expect(fail(item)).toBe(85);
-      // console.log(item)
     });
   });
 
@@ -66,11 +61,11 @@ describe('Enhancement', () => {
 
     it('Should lower durability by 10 levels', () => {
       expect(fail(item)).toBe(5);
-      // console.log(item)
     });
   });
 });
 
+// Get name modification
 describe('Renames item with enhancement level', () => {
   let item = {
     name: 'Narsil',
@@ -80,6 +75,5 @@ describe('Renames item with enhancement level', () => {
 
   it("Should modify item 'Narsil' to '[+20] Narsil'", () => {
     expect(get(item)).toBe('[+20] Narsil');
-    // console.log(item)
   });
 });

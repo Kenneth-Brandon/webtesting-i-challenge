@@ -5,6 +5,7 @@ module.exports = {
   get,
 };
 
+// Succeed
 function succeed(item) {
   let enhancement = item.enhancement;
 
@@ -15,6 +16,7 @@ function succeed(item) {
   }
 }
 
+// Fail
 function fail(item) {
   let enhancement = item.enhancement;
   let durability = item.durability;
@@ -28,11 +30,13 @@ function fail(item) {
   }
 }
 
+// Repair
 function repair(item) {
   let durability = item.durability;
   return (durability = 100);
 }
 
+// Get
 function get(item) {
   let enhancement = item.enhancement;
   if (enhancement > 0) {
